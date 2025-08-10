@@ -9,9 +9,9 @@ import Settings from "../pages/Settings";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // 공통 레이아웃
+    element: <Layout />, // Common layout
     children: [
-      { index: true, element: <Dashboard /> }, // "/" (index 라우트)
+      { index: true, element: <Dashboard /> }, // "/" (index route)
       { path: "applications", element: <Applications /> },
       { path: "calendar", element: <Calendar /> },
       { path: "stats", element: <Stats /> },
