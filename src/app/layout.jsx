@@ -1,16 +1,20 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import Header from "../components/layout/Header";
 import Sidebar from "../components/layout/Sidebar";
 
 export default function Layout() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <div className="flex flex-1">
-        <Sidebar />
+  const [open, setOpen] = useState(false);
 
-        <main className="flex-1 p-6 overflow-y-auto">
-          <Outlet />
+  return (
+    <div className="min-h-screen bg-[--color-background] text-[--color-foreground]">
+      <Header onToggleSidebar={() => setOpen((v) => !v)} />
+      <div className="flex min-h-[calc(100vh-56px)]">
+        <Sidebar open={open} onClose={() => setOpen(false)} />
+        <main className="flex-1 py-6 md:py-8 overflow-y-auto">
+          <div className="container">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
