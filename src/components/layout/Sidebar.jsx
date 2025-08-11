@@ -1,15 +1,23 @@
+import {
+  Menu,
+  LayoutDashboard,
+  FileText,
+  Calendar,
+  BarChart3,
+  Settings,
+} from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
 const links = [
-  { to: "/", label: "Dashboard", end: true },
-  { to: "/applications", label: "Applications" },
-  { to: "/calendar", label: "Calendar" },
-  { to: "/stats", label: "Stats" },
-  { to: "/settings", label: "Settings" },
+  { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/applications", label: "Applications", icon: FileText },
+  { to: "/calendar", label: "Calendar", icon: Calendar },
+  { to: "/stats", label: "Stats", icon: BarChart3 },
+  { to: "/settings", label: "Settings", icon: Settings },
 ];
 
-export default function Sidebar({ open, onClose }) {
+export default function Sidebar({ open, onClose, onToggleSidebar }) {
   return (
     <>
       {/* Mobile overlay */}
@@ -20,10 +28,9 @@ export default function Sidebar({ open, onClose }) {
         onClick={onClose}
       />
       <aside
-        className={`z-50 md:z-auto fixed md:static top-[56px] md:top-0
-                    /* ↓ 헤더를 뺀 높이로 고정 */
-                    h-[calc(100vh-56px)] md:h-auto
-                    w-64 shrink-0 bg-white border-r
+        className={`z-50 md:z-auto fixed md:static top-0
+                    h-[calc(100vh)] md:h-auto md:top-[56px] 
+                    w-48 shrink-0 bg-white md:py-6
                     transition-transform duration-200
                     ${
                       open
@@ -31,22 +38,39 @@ export default function Sidebar({ open, onClose }) {
                         : "-translate-x-full md:translate-x-0"
                     }`}
       >
-        <nav className="p-3 space-y-1">
-          {links.map(({ to, label, end }) => (
+        <div className="md:hidden h-[56px] pl-6 flex items-center gap-2">
+          <button
+            className="inline-flex md:hidden cursor-pointer"
+            aria-label="Toggle sidebar"
+            onClick={onToggleSidebar}
+          >
+            <Menu size={18} />
+          </button>
+          <div className="flex items-center">
+            <img src="/favicon.ico" alt="Logo" className="w-7 mr-1" />
+            <span className="text-lg font-semibold tracking-tight">
+              JobHunt
+            </span>
+          </div>
+        </div>
+
+        <nav className="px-4 space-y-2">
+          {links.map(({ to, label, icon: Icon, end }) => (
             <NavLink
               key={to}
               to={to}
               end={end}
               onClick={onClose}
               className={({ isActive }) =>
-                `block px-3 py-2 rounded-md text-sm transition
+                `flex items-center gap-2 px-3 py-2 rounded-md text-sm transition
                   ${
                     isActive
-                      ? "bg-gray-200 font-medium"
+                      ? "bg-secondary font-medium"
                       : "hover:bg-gray-100 text-gray-700"
                   }`
               }
             >
+              <Icon size={18} />
               {label}
             </NavLink>
           ))}

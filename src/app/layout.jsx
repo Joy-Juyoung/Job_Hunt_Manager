@@ -10,7 +10,11 @@ export default function Layout() {
     <div className="min-h-screen bg-[--color-background] text-[--color-foreground]">
       <Header onToggleSidebar={() => setOpen((v) => !v)} />
       <div className="flex min-h-[calc(100vh-56px)]">
-        <Sidebar open={open} onClose={() => setOpen(false)} />
+        <Sidebar
+          open={open}
+          onClose={() => setOpen(false)}
+          onToggleSidebar={() => setOpen((v) => !v)}
+        />
         <main className="flex-1 py-6 md:py-8 overflow-y-auto">
           <div className="container">
             <Outlet />
