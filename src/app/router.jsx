@@ -5,18 +5,46 @@ import Applications from "../pages/Applications";
 import Calendar from "../pages/Calendar";
 import Stats from "../pages/Stats";
 import Settings from "../pages/Settings";
+import RequireAuth from "../hooks/RequireAuth";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />, // Common layout
     children: [
-      { index: true, element: <Dashboard /> }, // "/" (index route)
-      { path: "applications", element: <Applications /> },
-      { path: "calendar", element: <Calendar /> },
-      { path: "stats", element: <Stats /> },
-      { path: "settings", element: <Settings /> },
-      { path: "*", element: <div>Not Found</div> }, // 404
+      { index: true, element: <Dashboard /> },
+      {
+        path: "applications",
+        element: (
+          <RequireAuth>
+            <Applications />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "calendar",
+        element: (
+          <RequireAuth>
+            <Calendar />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "stats",
+        element: (
+          <RequireAuth>
+            <Stats />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "settings",
+        element: (
+          <RequireAuth>
+            <Settings />
+          </RequireAuth>
+        ),
+      },
     ],
   },
 ]);
