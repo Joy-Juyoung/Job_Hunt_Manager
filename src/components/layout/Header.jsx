@@ -1,9 +1,13 @@
 import { LogOut, Menu } from "lucide-react";
 import React from "react";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ onToggleSidebar }) {
-  const { user, loading, signIn, signOut } = useAuthStore();
+  const { user, loading, signOut } = useAuthStore();
+  const navigate = useNavigate();
+
+  // console.log("user", user);
 
   return (
     <header className="header bg-white/80 backdrop-blur">
@@ -45,7 +49,11 @@ export default function Header({ onToggleSidebar }) {
               />
             </div>
           ) : (
-            <button className="btn btn-primary" onClick={signIn}>
+            // <button className="btn btn-primary" onClick={signIn}>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate("/login")}
+            >
               Login
             </button>
           )}

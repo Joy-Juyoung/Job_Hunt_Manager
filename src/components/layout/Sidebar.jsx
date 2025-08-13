@@ -10,7 +10,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const links = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/applications", label: "Applications", icon: FileText },
   { to: "/calendar", label: "Calendar", icon: Calendar },
   { to: "/stats", label: "Stats", icon: BarChart3 },
